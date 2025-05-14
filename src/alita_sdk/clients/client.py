@@ -61,6 +61,11 @@ class AlitaClient:
         self.ai_section_url = f'{self.base_url}{self.api_path}/integrations/integrations/default/{self.project_id}?section=ai'
         self.configurations: list = configurations or []
 
+    def get_mcp_toolkits(self, application_id: int):
+        url = f"{self.app}/{application_id}"
+        data = requests.get(url, headers=self.headers, verify=False).json()
+        return data
+
     def prompt(self, prompt_id, prompt_version_id, chat_history=None, return_tool=False):
         url = f"{self.prompt_versions}/{prompt_id}/{prompt_version_id}"
         data = requests.get(url, headers=self.headers, verify=False).json()
